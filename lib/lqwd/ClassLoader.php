@@ -43,7 +43,6 @@ class ClassLoader {
 	public function __construct(array $namespaces = array(), array $classes = array()) {
 		$this->namespaces = $namespaces;
 		$this->classes = $classes;
-		$this->loadClass('HTMLPurifier');
 	}
 
 	/**

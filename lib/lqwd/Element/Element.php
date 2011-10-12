@@ -116,11 +116,12 @@ abstract class Element extends Renderable {
 
 	protected function getRenderArgs() {
 		$this->changed = false;
-		if ($this->noId) unset($this->attributes[self::A_ID]);
-		$this->attributes[self::A_CLASS] = implode(' ', array_keys((array)$this->attributes[self::A_CLASS]));
-		if ($this->attributes[self::A_CLASS] == "")
-			unset($this->attributes[self::A_CLASS]);
-		return array($this->tag, $this->attributes, $this->inner, $this->forceCloseTag);
+		$attributes = $this->attributes;
+		if ($this->noId) unset($attributes[self::A_ID]);
+		$attributes[self::A_CLASS] = implode(' ', array_keys((array)$attributes[self::A_CLASS]));
+		if ($attributes[self::A_CLASS] == "")
+			unset($attributes[self::A_CLASS]);
+		return array($this->tag, $attributes, $this->inner, $this->forceCloseTag);
 	}
 
 	public function getId() {
