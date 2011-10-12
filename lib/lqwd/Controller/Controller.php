@@ -21,10 +21,17 @@ abstract class Controller implements IController {
 	 */
 	protected $renderable;
 
+  private $name;
+
 	public final function __construct($pageName, ControllerManager $cm) {
 		$this->ControllerManager = $cm;
+    $this->name = $pageName;
 		$this->renderable = $this->createRenderable();
 	}
+
+  public function getName() {
+    return $this->name;
+  }
 
 	protected abstract function createRenderable();
 

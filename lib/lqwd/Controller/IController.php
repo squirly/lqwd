@@ -11,4 +11,8 @@ interface IController {
 	public static function CreateName(IURI $URI);
 
 	public function processRequest(Request $request);
+
+  public function doPersist();
+
+  public function alwaysRebuild();
 }

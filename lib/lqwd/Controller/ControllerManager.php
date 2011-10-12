@@ -37,9 +37,12 @@ class ControllerManager {
 	public function processRequest($uriString, $requestData) {
 		$this->URI = URI::parse($uriString);
 		$renderManager = $this->renderMapper->getRenderManager($this->URI->getExtension());
-		$controller = $this->getController($this->URI->getPage());
 		$request = new Request($this->URI, $requestData);
+		$controller = $this->getController($this->URI->getPage());
 		$renderable = $controller->processRequest($request);
+    foreach ($this->controllers as $pCon)
+      if ($controller !== $pCon && $pCon->alwaysRebuild())
+        $pCon->processRequest($request);
 		return $renderable->render($renderManager);
 	}
 
@@ -66,7 +69,9 @@ class ControllerManager {
 		if ( isset($this->controllers[$name]) ) return $this->controllers[$name];
 		$controllerClass = $this->controllerMapper->getClass($name);
 		$name = $controllerClass::CreateName($this->URI);
-		return $this->controllers[$name] = new $controllerClass($name, $this);
+    $controller = new $controllerClass($name, $this);
+    if ($controller->doPersist()) $this->controllers[$name] = $controller;
+		return $controller;
 	}
 	
 	public function addController($name, IController $controller) {
