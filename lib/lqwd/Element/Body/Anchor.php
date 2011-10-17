@@ -15,7 +15,8 @@ use lqwd\Element\Text;
  */
 class Anchor extends \lqwd\Element\Element {
 	const A_HREF = 'href';
-  
+
+  /** @var \lqwdElement\Body\Anchor */
 	public static function createWithText($href, $text) {
 		return self::create($href)->addInner(Text::create($text));
 	}
@@ -24,4 +25,8 @@ class Anchor extends \lqwd\Element\Element {
 		$element = new self('a');
 		return $element->addAttribute(self::A_HREF, $href);
 	}
+
+  public function setHref($href) {
+    $this->addAttribute(self::A_HREF, $href);
+  }
 }
