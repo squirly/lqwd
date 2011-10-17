@@ -6,7 +6,7 @@ class URI implements IURI
 	private $filename;
 	private $extra = array();
 	private $extension;
-	private $query;
+	private $query = array();
 
 	public static function parse($string) {
     $uri = new URI;

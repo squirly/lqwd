@@ -8,6 +8,5 @@ namespace lqwd\Controller;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 interface IControllerMapper {
-    public function getClass($page);
+    public function getClass($page, $extra);
 }
-?>
