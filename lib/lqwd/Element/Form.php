@@ -25,7 +25,7 @@ class Form extends Element {
 	protected static function create($method, $action = null, $id = null) {
     $form = new self('form', $id);
     $form->addAttribute(self::A_METHOD, $method);
-    if (null === $action) $form->addAttribute(self::A_ACTION, $action);
+    if (null !== $action) $form->addAttribute(self::A_ACTION, $action);
 		return $form;
   }
 }

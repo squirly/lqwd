@@ -2,6 +2,7 @@
 namespace lqwd\Element;
 
 use lqwd\Render\Renderable;
+use lqwd\Element\Head\Metadata;
 
 /**
  * Description of Class
@@ -38,10 +39,11 @@ class Page extends \lqwd\Render\RenderGroup {
 		parent::add(Head\Doctype::createHTML5());
 		parent::add(Html::create('html', false)
 			->addInner($this->head
+       ->addInner(Metadata::createCharacterSet("UTF-8"))
 				->addInner(Head\Title::create()
 					->addInner($this->title)))
 			->addInner($this->body));
-		$this->addJavascript('pageLoader', 'function click(element) {window.location = element.href+\'?5\';return false;}', false);
+		$this->addJavascript('pageLoader', 'function link(element) {window.location = element.href+\'?5\';return false;}', false);
 	}
 
 	public function getTitle() {

@@ -16,7 +16,7 @@ class ControllerManager {
 	/** @var lqwd\Controller\IRenderMapper */
 	private $renderMapper;
 	/** @var array */
-	private $controllers;
+	private $controllers = array();
 	private $static = array(
 		'\lqwd\Element\Element' => array('IdHelper' => '')
 	);
@@ -25,8 +25,7 @@ class ControllerManager {
 	 */
 	private $URI;
 
-	public function __construct( $sessionId, array $config, array $serialize = array()) {
-		$this->sessionId = $sessionId;
+	public function __construct(array $config, array $serialize = array()) {
 		$this->URI = isset($config['URI']) ? new $config['URI'] : new URI;
 		$this->controllerMapper = new $config['ControllerMapper'];
 		$this->renderMapper = isset($config['RenderMapper'])
@@ -55,7 +54,7 @@ class ControllerManager {
 
 	public function __sleep() {
 		foreach ($this->static as $class => $properties)
-			foreach ($properties as $property => $value)
+			foreach (array_keys($properties) as $property)
 				$this->static[$class][$property] = $class::$$property;
 			$this->ElementIdHelper = Element::$IdHelper;
 		return array_keys(get_object_vars($this));
@@ -86,4 +85,8 @@ class ControllerManager {
 	public function removeController($name) {
 		unset($this->controllers[$name]);
 	}
+
+  public function clearCachedControllers() {
+    $this->controllers = array();
+  }
 }

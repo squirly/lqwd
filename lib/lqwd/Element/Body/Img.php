@@ -12,8 +12,8 @@ namespace lqwd\Element\Body;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class Img extends \lqwd\Element\Element {
-	public static function create($url) {
+	public static function create($url, $alt) {
 		$instance = new self('img');
-		return $instance->setAttribute('src', $url);
+		return $instance->setAttribute('src', $url)->setAttribute('alt', $alt);
 	}
 }
