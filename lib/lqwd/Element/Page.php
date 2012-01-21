@@ -6,6 +6,8 @@ use lqwd\Element\Head\Metadata;
 
 /**
  * Description of Class
+ * 
+ * add ability to remove dojo or a class that you pass that enables dojo or jscript, etc.
  *
  * @todo Document Code
  * @author Tyler Jones <tylerjones64@gmail.com>
@@ -43,7 +45,12 @@ class Page extends \lqwd\Render\RenderGroup {
 				->addInner(Head\Title::create()
 					->addInner($this->title)))
 			->addInner($this->body));
-		$this->addJavascript('pageLoader', 'function link(element) {window.location = element.href+\'?5\';return false;}', false);
+		$this->addJavascript('dojo', "http://ajax.googleapis.com/ajax/libs/dojo/1.7.1/dojo/dojo.js", true)
+		->addJavascript('pageLoader', '/javascript/lqwd.js', true);
+	}
+	
+	public function getBody() {
+		return $this->body;
 	}
 
 	public function getTitle() {

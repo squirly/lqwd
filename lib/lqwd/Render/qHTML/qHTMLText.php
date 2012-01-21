@@ -12,6 +12,6 @@ class qHTMLText implements \lqwd\Element\ITextRenderer {
 			/**
 			 * @todo Use HTML Purifier
 			 */
-			return \str_replace('|', '||', $text);
+			return \str_replace('|', '&#124;', $text);
 		}
 }

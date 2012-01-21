@@ -38,9 +38,9 @@ abstract class Element extends Renderable {
 	 */
 	private $inner;
 	/**
-	 * @var bool
+	 * @var lqwd\Element\Changes
 	 */
-	private $changed = true;
+	private $changes;
   /**
 	 * @var bool
 	 */
@@ -55,7 +55,7 @@ abstract class Element extends Renderable {
 	}
 
 	public function hasChanged() {
-		return $this->changed;
+		return $this->changes;
 	}
 
 	/**
@@ -121,7 +121,7 @@ abstract class Element extends Renderable {
 		$attributes[self::A_CLASS] = implode(' ', array_keys((array)$attributes[self::A_CLASS]));
 		if ($attributes[self::A_CLASS] == "")
 			unset($attributes[self::A_CLASS]);
-		return array($this->tag, $attributes, $this->inner, $this->forceCloseTag);
+		return array($this->tag, $attributes, $this->hasChanged(), $this->inner, $this->forceCloseTag);
 	}
 
 	public function getId() {

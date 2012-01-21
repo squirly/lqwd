@@ -8,4 +8,4 @@ namespace lqwd\Element;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 interface IElementRenderer {
-	public static function render($tag, array $attributes, \lqwd\Render\RenderGroup $inner = null, $forceClose = false);}
+	public static function render($tag, array $attributes, $hasChanged, \lqwd\Render\RenderGroup $inner = null, $forceClose = false);}

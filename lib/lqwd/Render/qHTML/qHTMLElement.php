@@ -11,12 +11,18 @@ use \lqwd\Render\RenderGroup;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class qHTMLElement implements \lqwd\Element\IElementRenderer {
-	public static function render($tag, array $attributes, RenderGroup $inner = null) {
-		$return = "#$tag";
-		foreach ($attributes as $name => $value) $return .= ":$name".(isset($value)?">'$value'":'');
+	public static function render($tag, array $attributes, array $changes, RenderGroup $inner = null, $forceClose = false) {
+		$return = '';
+		$innerSeparator = "|";
+		$noInner = ';';
+		if ($hasChanged) {
+			$return += "#$tag";
+			foreach ($attributes as $name => $value) $return .= ":$name".(isset($value)?">'$value'":'');
+			$innerSeparator = $noInner = '';
+		}
 		return $return
 			.($inner->count() > 0
-				?"|".$inner->render()."|"
-				:';');
+				?$innerSeparator.$inner->render().$innerSeparator
+				:$noInner);
 	}
 }

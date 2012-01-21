@@ -11,7 +11,7 @@ use \lqwd\Render\RenderGroup;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class HTMLElement implements \lqwd\Element\IElementRenderer {
-	public static function render($tag, array $attributes, RenderGroup $inner = null, $forceClose = false) {
+	public static function render($tag, array $attributes, $hasChanged, RenderGroup $inner = null, $forceClose = false) {
     $rends = $inner->getRenderables();
 		return self::generateOpeningTag($tag, $attributes)
           .($inner->count() > 0 || $forceClose

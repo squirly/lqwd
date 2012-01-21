@@ -9,6 +9,9 @@ namespace lqwd\Render\HTML;
  */
 class HTMLText implements \lqwd\Element\ITextRenderer {
     public static  function render($text) {
+			/**
+			 * @todo Use HTML Purifier
+			 */
 			return $text;
 		}
 }
