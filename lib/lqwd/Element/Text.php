@@ -15,7 +15,7 @@ class Text extends \lqwd\Render\Renderable{
 	/**
 	 * @var bool
 	 */
-	protected $changed;
+	protected $changed = true;
 
 	public static function create($text){
 		return new self($text);
@@ -30,6 +30,7 @@ class Text extends \lqwd\Render\Renderable{
 	}
 
 	public function setText($text) {
+		$this->changed = true;
 		$this->text = $text;
 		return $this;
 	}
@@ -39,8 +40,9 @@ class Text extends \lqwd\Render\Renderable{
 	}
 
 	protected function getRenderArgs() {
-		 return array($this->text);
-		}
+		$this->changed = false;
+		return array($this->text);
+	}
 
 	public function getId() {
 		return null;

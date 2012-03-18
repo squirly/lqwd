@@ -20,7 +20,9 @@ class RenderGroup extends Renderable {
 	public function hasChanged() {
 		$return = false;
 		foreach ($this->renderables as $renderable) {
-			$return |= $renderable->isNew();
+			if ($renderable->hasChanged() != Renderable::NO) {
+				$return |= Renderable::INNER;
+			}
 		}
 		return $return;
 	}

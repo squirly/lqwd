@@ -38,9 +38,13 @@ abstract class Element extends Renderable {
 	 */
 	private $inner;
 	/**
-	 * @var lqwd\Element\Changes
+	 * @var int
 	 */
-	private $changes;
+	private $changed = 0;
+	/**
+	 * @var int
+	 */
+	private $changed_cache = 0;
   /**
 	 * @var bool
 	 */
@@ -55,7 +59,11 @@ abstract class Element extends Renderable {
 	}
 
 	public function hasChanged() {
-		return $this->changes;
+		if (isset($this->changed_cache)) return $this->changed_cache;
+		$changed = Renderable::NO;
+		$changed += $this->changed?Renderable::THIS:0;
+		$changed += $this->inner->hasChanged()?Renderable::INNER:0;
+		return $this->changed_cache = $changed;
 	}
 
 	/**
@@ -115,13 +123,15 @@ abstract class Element extends Renderable {
 	}
 
 	protected function getRenderArgs() {
-		$this->changed = false;
+		$changed = $this->hasChanged();
+		$this->changed = Renderable::NO;
+		$this->changed_cache = null;
 		$attributes = $this->attributes;
 		if ($this->noId) unset($attributes[self::A_ID]);
 		$attributes[self::A_CLASS] = implode(' ', array_keys((array)$attributes[self::A_CLASS]));
 		if ($attributes[self::A_CLASS] == "")
 			unset($attributes[self::A_CLASS]);
-		return array($this->tag, $attributes, $this->hasChanged(), $this->inner, $this->forceCloseTag);
+		return array($this->tag, $attributes, $changed, $this->inner, $this->forceCloseTag);
 	}
 
 	public function getId() {

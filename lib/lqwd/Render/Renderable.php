@@ -32,5 +32,9 @@ abstract class Renderable {
 		return $this->new;
 	}
 
+	const NO = 0;
+	const THIS = 1;
+	const INNER = 2;
+	const BOTH = 3;
 	abstract public function hasChanged();
 }

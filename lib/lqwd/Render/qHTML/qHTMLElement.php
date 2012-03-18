@@ -3,6 +3,7 @@
 namespace lqwd\Render\qHTML;
 
 use \lqwd\Render\RenderGroup;
+use \lqwd\Render\Renderable;
 
 /**
  * Description of ElementRenderer
@@ -11,18 +12,19 @@ use \lqwd\Render\RenderGroup;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class qHTMLElement implements \lqwd\Element\IElementRenderer {
-	public static function render($tag, array $attributes, array $changes, RenderGroup $inner = null, $forceClose = false) {
+	public static function render($tag, array $attributes, $hasChanged, RenderGroup $inner = null, $forceClose = false) {
 		$return = '';
-		$innerSeparator = "|";
-		$noInner = ';';
-		if ($hasChanged) {
-			$return += "#$tag";
-			foreach ($attributes as $name => $value) $return .= ":$name".(isset($value)?">'$value'":'');
-			$innerSeparator = $noInner = '';
+		if ($hasChanged != Renderable::NO) {
+			$return += "#$tag".(isset($attributes['id'])?">".$attributes['id']:'');
+			unset($attributes['id']);
+			if ($hasChanged & Renderable::THIS) {
+				foreach ($attributes as $name => $value) $return .= ":$name".(isset($value)?">'$value'":'');
+			}
+			if ($hasChanged & Renderable::INNER)
+				$return .= ($inner->count() > 0
+					?'|'.$inner->render().'|'
+					:';');
 		}
-		return $return
-			.($inner->count() > 0
-				?$innerSeparator.$inner->render().$innerSeparator
-				:$noInner);
+		return $return;
 	}
 }

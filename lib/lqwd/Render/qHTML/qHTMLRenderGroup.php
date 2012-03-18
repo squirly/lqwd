@@ -8,11 +8,11 @@ namespace lqwd\Render\qHTML;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class qHTMLRenderGroup implements \lqwd\Render\IRenderGroupRenderer {
-	public static function render($renderables) {
+	public static function render(array $renderables) {
 		$return = "";
-		foreach ($renderables as $renderable) {
-			$return .= $renderable->render();
-		}
+		foreach ($renderables as $renderable)
+			if ($renderable->hasChanged())
+				$return .= $renderable->render();
 		return $return;
 	}
 }
