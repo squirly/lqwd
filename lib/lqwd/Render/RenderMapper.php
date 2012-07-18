@@ -11,6 +11,7 @@ class RenderMapper implements IRenderMapper {
     public function getRenderManager($mode) {
 			switch (\strtolower($mode)) {
 				case 'qhtml':
+        case 'q':
 					return new qHTML\qHTMLRenderManager;
 				case 'htm':
 				case 'html':

@@ -2,7 +2,7 @@
 
 namespace lqwd\Render\HTML;
 
-use \lqwd\Render\RenderGroup;
+use \lqwd\Render\Renderable;
 
 /**
  * Description of ElementRenderer
@@ -11,16 +11,12 @@ use \lqwd\Render\RenderGroup;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class HTMLElement implements \lqwd\Element\IElementRenderer {
-	public static function render($tag, array $attributes, $hasChanged, RenderGroup $inner = null, $forceClose = false) {
-    $rends = $inner->getRenderables();
+	public static function render($tag, array $attributes, $hasChanged, Renderable $inner, $close) {
 		return self::generateOpeningTag($tag, $attributes)
-          .($inner->count() > 0 || $forceClose
-            ? self::generateInner($inner).($inner->count() == 1 && \reset($rends) instanceof \lqwd\Element\Text
-                ? self::getTab(false, false)
-                : self::getTab(false)).
-              self::generateClose($tag)
+          .($close
+            ? self::generateInner($inner).self::getTab(false).self::generateClose($tag)
             : self::getTab(false, false)
-            );
+          );
 	}
 
   private static function generateOpeningTag($tag, $attributes) {
@@ -45,9 +41,7 @@ class HTMLElement implements \lqwd\Element\IElementRenderer {
   }
 
   private static function generateInner($inner) {
-    return $inner->count() > 0
-      ? $inner->render()
-      : '';
+    return $inner->render();
   }
 
   private static function generateClose($tag) {

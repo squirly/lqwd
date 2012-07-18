@@ -7,7 +7,7 @@ namespace lqwd\Element;
  * @todo Document Code
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
-class Text extends \lqwd\Render\Renderable{
+class Text extends \lqwd\Render\Renderable {
 	/**
 	 * @var string
 	 */
@@ -30,6 +30,7 @@ class Text extends \lqwd\Render\Renderable{
 	}
 
 	public function setText($text) {
+    $this->changed = true;
 		$this->text = $text;
 		return $this;
 	}
@@ -39,7 +40,7 @@ class Text extends \lqwd\Render\Renderable{
 	}
 
 	protected function getRenderArgs() {
-		 return array($this->text);
+		 return array($this->text, $this->changed);
 		}
 
 	public function getId() {

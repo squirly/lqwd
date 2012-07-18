@@ -8,46 +8,46 @@ namespace lqwd\Controller;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 abstract class Controller implements IController {
-	/**
-	 * @var ControllerManager
-	 */
-	private $ControllerManager;
-	/**
-	 * @var Controller
-	 */
-	private $controllers;
-	/**
-	 * @var lqwd\Render\Renderable
-	 */
-	protected $renderable;
+  /**
+   * @var ControllerManager
+   */
+  private $ControllerManager;
+  /**
+   * @var Controller
+   */
+  private $controllers;
+  /**
+   * @var lqwd\Render\Renderable
+   */
+  protected $renderable;
 
   private $name;
 
-	public final function __construct($pageName, ControllerManager $cm) {
-		$this->ControllerManager = $cm;
+  public final function __construct($pageName, ControllerManager $cm) {
+    $this->ControllerManager = $cm;
     $this->name = $pageName;
-		$this->renderable = $this->createRenderable();
-	}
+    $this->renderable = $this->createRenderable();
+  }
 
   public function getName() {
     return $this->name;
   }
 
-	protected abstract function createRenderable();
+  protected abstract function createRenderable();
 
-	/**
-	 *
-	 * @return ControllerManager
-	 */
-	protected function getControllerManager() {
-		return $this->ControllerManager;
-	}
+  /**
+   *
+   * @return ControllerManager
+   */
+  protected function getControllerManager() {
+    return $this->ControllerManager;
+  }
 
-	/**
-	 *
-	 * @return lqwd\Render\Renderable
-	 */
-	public function getRenderable() {
-		return $this->renderable;
-	}
+  /**
+   *
+   * @return lqwd\Render\Renderable
+   */
+  public function getRenderable() {
+    return $this->renderable;
+  }
 }

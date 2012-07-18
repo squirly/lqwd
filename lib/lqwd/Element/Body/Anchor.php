@@ -18,7 +18,7 @@ class Anchor extends \lqwd\Element\Element {
 
   /** @var \lqwdElement\Body\Anchor */
 	public static function createWithText($href, $text) {
-		return self::create($href)->addInner(Text::create($text));
+		return self::create($href)->setInner(Text::create($text));
 	}
 
 	public static function create($href) {

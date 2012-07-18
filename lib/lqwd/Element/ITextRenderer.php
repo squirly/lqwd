@@ -8,5 +8,5 @@ namespace lqwd\Element;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 interface ITextRenderer {
-    public static function render($text);
+    public static function render($text, $hasChanged);
 }

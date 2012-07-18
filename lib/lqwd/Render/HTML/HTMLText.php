@@ -8,7 +8,7 @@ namespace lqwd\Render\HTML;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class HTMLText implements \lqwd\Element\ITextRenderer {
-    public static  function render($text) {
+    public static  function render($text, $hasChanged) {
 			/**
 			 * @todo Use HTML Purifier
 			 */

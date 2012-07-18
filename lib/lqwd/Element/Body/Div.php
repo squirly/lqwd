@@ -12,7 +12,6 @@ namespace lqwd\Element\Body;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class Div extends \lqwd\Element\Element {
-  protected $forceCloseTag = true;
 	/**
 	 *
 	 * @param <type> $tag

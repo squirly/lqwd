@@ -12,5 +12,5 @@ namespace lqwd\Render;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 interface IRenderGroupRenderer {
-    public static function render($renderables);
+    public static function render($renderables, $added, $removed);
 }

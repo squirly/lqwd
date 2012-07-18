@@ -12,18 +12,17 @@ namespace lqwd\Element\Body;
  * @author Tyler Jones <tylerjones64@gmail.com>
  */
 class Span extends \lqwd\Element\Element {
-  protected $forceCloseTag = true;
-	/**
-	 *
-	 * @param <type> $tag
-	 * @param <type> $id
-	 * @return Element
-	 */
-	public static function create($id = null) {
-		return new self('Span', $id);
-	}
+  /**
+   *
+   * @param <type> $tag
+   * @param <type> $id
+   * @return Element
+   */
+  public static function create($id = null) {
+    return new self('span', $id);
+  }
 
-	public static function createWithText($text, $id = null) {
-		return self::create($id)->addInner(\lqwd\Element\Text::create($text));
-	}
+  public static function createWithText($text, $id = null) {
+    return self::create($id)->setInner(\lqwd\Element\Text::create($text));
+  }
 }
